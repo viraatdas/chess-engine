@@ -1,6 +1,3 @@
-from multiprocessing.spawn import import_main_path
-
-
 import chess
 from collections import defaultdict
 from constants import PIECE_SCORE_MAP, PIECES
