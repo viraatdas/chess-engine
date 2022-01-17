@@ -5,7 +5,8 @@
 Tested on `Python 3.6`
 
 - [Python-chess](https://python-chess.readthedocs.io/en/latest/)
-  Run `pip install -r requirements.txt`
+
+Run `pip install -r requirements.txt`
 
 ## How to run?
 
