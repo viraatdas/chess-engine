@@ -1,20 +1,16 @@
-## Purpose
+# Chess Engine
 
-This is a simple chess engine that you can play against.
+## Install dependencies
 
-It uses a greedy strategy to make moves, where it'll try to optimize based on the number of points.
+Tested on `Python 3.6`
 
-It'll scan two levels of the search tree (i.e. only look forward two positions and optimized based on that).
+- `pip install -r requirements.txt`
 
-### Define
+## How to run?
 
-Board and games rules
+- `python play.py`
 
-Pieces:
+## Strategies
 
-- Blank
-- Pawn - 1 pt
-- Bishop - 3 pt
-- Knight - 3 pt
-- Rook - 5 pt
-- Queen - 9 pt
+- Greedy [need to fix]
+  - It'll scan two levels of the search tree (i.e. only look forward two positions and optimized based on that).
