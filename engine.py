@@ -44,3 +44,6 @@ class Engine:
 
     def is_checkmate(self):
         return self.board.is_checkmate()
+
+    def is_stalemate(self):
+        return self.board.is_stalemate()
