@@ -1,3 +1,4 @@
+from distutils.sysconfig import get_config_h_filename
 from engine import Engine
 from constants import VALID_COLOR_LIST
 
@@ -7,6 +8,26 @@ class Game:
         self.HUMAN_COLOR = None
         self.CPU_COLOR = None
         self.engine = None
+
+    def get_game_status(self):
+        """
+        return True if game is over (checkmate or stalemate)
+        """
+        is_checkmate = self.engine.is_checkmate()
+        if is_checkmate:
+            print(f"Checkmated")
+            return True
+
+        is_stalamate = self.engine.is_stalemate()
+        if is_stalamate:
+            print("Stalemate")
+            return True
+
+        is_check = self.engine.is_check()
+        if is_check:
+            print("Check")
+
+        return False
 
     def human_make_next_move(self):
         """
@@ -47,10 +68,13 @@ class Game:
             self.cpu_make_next_move()
             self.CPU_COLOR = VALID_COLOR_LIST[0]
 
-        while True:
+        is_game_terminated = self.get_game_status()
+
+        while not is_game_terminated:
             self.engine.print_board()
             self.human_make_next_move()
             self.cpu_make_next_move()
+            is_game_terminated = self.get_game_status()
 
 
 game = Game()
