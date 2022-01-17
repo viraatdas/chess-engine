@@ -1,4 +1,5 @@
 import chess
+from greedy import Greedy
 
 
 class State:
@@ -21,8 +22,13 @@ class State:
         pass
 
     def get_next_move(self):
+        greedy_strategy = Greedy(self.board, self.board.turn)
+        move = greedy_strategy.greedy()
+        print(move)
 
-        pass
-
-    def __get_board(self):
+    def get_board(self):
         return self.board
+
+
+s = State()
+print(s.get_next_move())
