@@ -37,14 +37,16 @@ class Game:
                 "What color do you want to play as? (white/black)")
 
         self.CPU_COLOR = VALID_COLOR_LIST[1]
+        self.engine = Engine()
 
+    def play(self):
+        self.game_setup()
+
+        # if human is black, CPU makes the first move
         if self.HUMAN_COLOR == VALID_COLOR_LIST[1]:
             self.cpu_make_next_move()
             self.CPU_COLOR = VALID_COLOR_LIST[0]
 
-        self.engine = Engine()
-
-    def play(self):
         while True:
             self.engine.print_board()
             self.human_make_next_move()
