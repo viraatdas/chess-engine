@@ -13,7 +13,7 @@ Run `python play.py`
 
 ## Strategies
 
-- Greedy [need to fix]
+- Greedy
   - It'll scan two levels of the search tree (i.e. only look forward two positions and optimized based on that).
 
 ## How is the codebase structured?

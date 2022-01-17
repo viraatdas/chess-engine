@@ -12,7 +12,10 @@ class Greedy:
         self.depth_level = depth_level
         self.CHECKMATE_SCORE = 99999
 
-    # computes score of a given color for a given board
+    # compute the score based on a formula and current score
+    def score_formula(self, white_score, black_score):
+        pass
+
     def compute_score(self) -> dict:
         # ex of map: {chess.WHITE: 0, chess.BLACK: 0}
         SCORES = defaultdict(lambda: 0)
@@ -39,10 +42,12 @@ class Greedy:
         """
         curr_legal_moves = self.board.legal_moves
 
-        white_score, black_score = self.compute_score()
+        curr_score = self.compute_score()[self.curr_color]
+        opp_score = self.compute_score()[self.opp_color]
 
+        # we want to maximize best_score_diff
         best_move = None
-        best_score_diff = -1
+        best_score_diff = curr_score - opp_score
 
         for curr_move in curr_legal_moves:
             self.board.push(curr_move)
@@ -50,22 +55,22 @@ class Greedy:
 
             for opp_move in opposing_legal_moves:
                 self.board.push(opp_move)
+                curr_next_legal_moves = self.board.legal_moves
+                for curr_next_move in curr_next_legal_moves:
+                    self.board.push(curr_next_move)
+                    # score after making two moves
+                    opp_score_after_two_moves = self.compute_score()[
+                        self.opp_color]
+                    curr_score_after_two_moves = self.compute_score()[
+                        self.curr_color]
 
-                # score after making two moves
-                if self.curr_color == chess.WHITE:
-                    _, curr_black_score = self.compute_score()
-                    curr_score_diff = black_score - curr_black_score
+                    score_diff = curr_score_after_two_moves - opp_score_after_two_moves
+                    if score_diff > best_score_diff:
+                        best_score_diff = score_diff
+                        best_move = curr_move
 
-                else:
-                    curr_white_score, _ = self.compute_score()
-                    curr_score_diff = white_score - curr_white_score
-
-                if curr_score_diff > best_score_diff:
-                    best_score_diff = curr_score_diff
-                    best_move = curr_move
-
+                    self.board.pop()
                 self.board.pop()
-
             self.board.pop()
 
         return best_move
